@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: toker-control
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ENROLLMENT_TOKEN
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
