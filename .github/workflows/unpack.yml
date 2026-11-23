@@ -1,0 +1,28 @@
+
+name: Unpack TOKER Control ZIP
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Unpack archive
+        run: |
+          unzip -o TOKER_CONTROL_demo.zip -d .
+          rm TOKER_CONTROL_demo.zip
+
+      - name: Save files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack TOKER CONTROL project" || echo "No changes"
+          git push
